@@ -30,7 +30,7 @@ function Wash_menu(money)
                             onSelected = function()
                                 transform_load = true
                                 jessy = false
-                                money = 0
+                                TriggerServerEvent('Jessy:Wash:Remove')
                                 Wash__menu.Closable = false
                             end
                         })
@@ -49,6 +49,8 @@ function Wash_menu(money)
                                 transform_lvl = transform_lvl + 0.003
                             else
                                 transform_load = false
+                                TriggerServerEvent('Jessy:Wash:Add', money)
+                                money = 0
                                 Wash__menu.Closable = true
                             end
                         end)
