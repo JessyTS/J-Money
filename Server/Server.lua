@@ -72,3 +72,10 @@ AddEventHandler('Jessy:Wash:Remove', function ()
         end
     end
 end)
+
+ESX.RegisterServerCallback('JessyTS:Wash:GetMoney', function(source, cb)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local money_black = xPlayer.getInventoryItem('black_money').count
+
+    cb(money_black)
+end)

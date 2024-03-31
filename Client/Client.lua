@@ -1,22 +1,72 @@
 local jessy = true
-local farm = nil
-local open, recup_etat, Checked_Box, transform_etat, transform_load, recup_load, transform_lvl, recup_lvl, laboratoire, separateur = false, false, false, true, nil, nil, 0.0, 0.0, true, true
-local Process_menu = RageUI.CreateMenu("", "INTERACTION")
-Process_menu.Display.Header = true
-Process_menu.Closed = function()
+local open, transform_load, transform_lvl = false, nil, 0.0
+local Wash__menu = RageUI.CreateMenu("", "INTERACTION")
+Wash__menu.Display.Header = true
+Wash__menu.Closed = function()
     open = false
     jessy = true
-    laboratoire = true
-    separateur = true
-    transform_etat = true
+    transform_lvl = 0.0
+    transform_load = false
     FreezeEntityPosition(PlayerPedId(), false)
 end
 
+function Wash_menu(money)
+    if open then
+        open = false
+        RageUI.Visible(Wash__menu, false)
+        return
+    else
+        open = true
+        RageUI.Visible(Wash__menu, true)
+        CreateThread(function()
+            while open do
+
+                RageUI.IsVisible(Wash__menu, function()
+
+                    RageUI.Separator('Blanchiement')
+
+                    if money > 1000 then
+                        RageUI.Button('Blanchir', '', {RightLabel = "→"}, true, {
+                            onSelected = function()
+                                transform_load = true
+                                jessy = false
+                                money = 0
+                                Wash__menu.Closable = false
+                            end
+                        })
+                    else
+                        RageUI.Button('Blanchir', 'Il vous faut au moins 1000 $ (sale) pour blanchir', {RightLabel = "→"}, false, {
+                            onSelected = function()
+                            end
+                        })
+                    end
+
+                    RageUI.Separator('Vous avez sur vous : '..money..' $ (sale)')
+
+                    if transform_load == true then
+                        RageUI.PercentagePanel(transform_lvl or 0.0, 'Blanchiement en cours'.." (~b~"..math.floor(transform_lvl * 100)..'~s~'.." %)", "", "",  function(Hovered, Active, Percent)
+                            if transform_lvl < 1.0 then
+                                transform_lvl = transform_lvl + 0.003
+                            else
+                                transform_load = false
+                                Wash__menu.Closable = true
+                            end
+                        end)
+                    end
+
+                    RageUI.Line()
+
+                end)
+            Wait(0)
+            end
+        end)
+    end
+end
 
 Citizen.CreateThread(function()
     while true do
         local playerPed = PlayerPedId()
-        local lieu = vector3(90.6172, 3745.0625, 40.7709)
+        local lieu = vector3(2201.3740, 5552.3564, 54.0785)
         local plyCoords3 = GetEntityCoords(GetPlayerPed(-1), false)
         local dist3 = Vdist(plyCoords3.x, plyCoords3.y, plyCoords3.z, lieu)
         if dist3 <= 15 then
@@ -31,7 +81,9 @@ Citizen.CreateThread(function()
                     if IsControlJustPressed(1, 51) then
                         if jessy then
                             FreezeEntityPosition(PlayerPedId(), true)
-                            Process__menu()
+                            ESX.TriggerServerCallback('JessyTS:Wash:GetMoney', function(money)
+                                Wash_menu(money)
+                            end)
                             jessy = false
                             Wait(1000)
                             jessy = true
