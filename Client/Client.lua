@@ -67,28 +67,32 @@ end
 
 Citizen.CreateThread(function()
     while true do
-        local playerPed = PlayerPedId()
-        local lieu = vector3(2201.3740, 5552.3564, 54.0785)
-        local plyCoords3 = GetEntityCoords(GetPlayerPed(-1), false)
-        local dist3 = Vdist(plyCoords3.x, plyCoords3.y, plyCoords3.z, lieu)
-        if dist3 <= 15 then
-            if jessy then
-                DrawMarker(21, lieu, 0.0, 0.0, 0.0, 0.0,0.0,0.0, 0.7, 0.7, 0.7, 0, 166, 255, 255, true, true, p19, true)
-            end
-            if dist3 <= 3.0 then
-                if not IsPedInAnyVehicle(playerPed, true) then
+        for _,v in pairs(TS_Blanchiement.Pos_Blanchiement) do
+            if TS_Blanchiement.Blanchiement then
+                local playerPed = PlayerPedId()
+                local lieu = vector3(2201.3740, 5552.3564, 54.0785)
+                local plyCoords3 = GetEntityCoords(GetPlayerPed(-1), false)
+                local dist3 = Vdist(plyCoords3.x, plyCoords3.y, plyCoords3.z, lieu)
+                if dist3 <= 15 then
                     if jessy then
-                        ESX.ShowHelpNotification('Appuyez sur ~INPUT_CONTEXT~ pour Intéragir !')
+                        DrawMarker(21, lieu, 0.0, 0.0, 0.0, 0.0,0.0,0.0, 0.7, 0.7, 0.7, 0, 166, 255, 255, true, true, p19, true)
                     end
-                    if IsControlJustPressed(1, 51) then
-                        if jessy then
-                            FreezeEntityPosition(PlayerPedId(), true)
-                            ESX.TriggerServerCallback('JessyTS:Wash:GetMoney', function(money)
-                                Wash_menu(money)
-                            end)
-                            jessy = false
-                            Wait(1000)
-                            jessy = true
+                    if dist3 <= 3.0 then
+                        if not IsPedInAnyVehicle(playerPed, true) then
+                            if jessy then
+                                ESX.ShowHelpNotification(TS_Blanchiement.Text_Interact)
+                            end
+                            if IsControlJustPressed(1, 51) then
+                                if jessy then
+                                    FreezeEntityPosition(PlayerPedId(), true)
+                                    ESX.TriggerServerCallback('JessyTS:Wash:GetMoney', function(money)
+                                        Wash_menu(money)
+                                    end)
+                                    jessy = false
+                                    Wait(1000)
+                                    jessy = true
+                                end
+                            end
                         end
                     end
                 end
