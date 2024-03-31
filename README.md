@@ -1,7 +1,9 @@
 Script de Blanchiment d'argent Gratuit
 
 RageUI
+
 Full Optimisé
+
 Compatible ESX
 
 Je t'invite à rejoindre mes Liens pour plus de scripts
