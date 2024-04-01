@@ -4,8 +4,6 @@ TS_Blanchiement = {
 
     Blanchiement = true,
 
-    Locale = 'fr',
-
     ESX = 'new',
 
     Debug = true,
