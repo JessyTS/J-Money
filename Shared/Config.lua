@@ -12,7 +12,13 @@ TS_Blanchiement = {
 
     Webhook_Discord = true,
 
-    Gains = 75,
+    Gains = 50,
+
+    Marker_Distance = 15,
+
+    Interact_Distance = 1.5,
+
+    Money_Black_Item = 'black_money',
 
     Webhook_Server_Name = 'Money',
     Webhook_color = 2061822,
@@ -35,8 +41,8 @@ TS_Blanchiement = {
     MarkerTourne = true, -- Si le marker tourne (true = oui, false = non)
 
     Pos_Blanchiement = {
-        [1] = {vector3(2203.7351, 5553.5718, 54.0881)},
-        [2] = {vector3(2201.3713, 5551.7759, 54.0760)},
-        [3] = {vector3(90.6172, 3745.0625, 40.7709)},
+        [1] = {Pos = vector3(2203.7351, 5553.5718, 54.0881)},
+        [2] = {Pos = vector3(2201.3713, 5551.7759, 54.0760)},
+        [3] = {Pos = vector3(2198.6106, 5555.8721, 54.0235)},
     }
 }

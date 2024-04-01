@@ -1,6 +1,6 @@
 local jessy = true
 local open, transform_load, transform_lvl = false, nil, 0.0
-local Wash__menu = RageUI.CreateMenu("", "INTERACTION")
+local Wash__menu = RageUI.CreateMenu("J-Money", "INTERACTION")
 Wash__menu.Display.Header = true
 Wash__menu.Closed = function()
     open = false
@@ -49,7 +49,7 @@ function Wash_menu(money)
                                 transform_lvl = transform_lvl + 0.003
                             else
                                 transform_load = false
-                                TriggerServerEvent('Jessy:Wash:Add', money)
+                                TriggerServerEvent('Jessy:Wash:Add', money, ESX.PlayerData.job.name, GetPlayerServerId(PlayerId()))
                                 money = 0
                                 Wash__menu.Closable = true
                             end
@@ -70,14 +70,14 @@ Citizen.CreateThread(function()
         for _,v in pairs(TS_Blanchiement.Pos_Blanchiement) do
             if TS_Blanchiement.Blanchiement then
                 local playerPed = PlayerPedId()
-                local lieu = vector3(v.pos.x, v.pos.y, v.pos.z)
+                local lieu = vector3(v.Pos.x, v.Pos.y, v.Pos.z)
                 local plyCoords3 = GetEntityCoords(GetPlayerPed(-1), false)
                 local dist3 = Vdist(plyCoords3.x, plyCoords3.y, plyCoords3.z, lieu)
-                if dist3 <= 15 then
+                if dist3 <= TS_Blanchiement.Marker_Distance then
                     if jessy then
                         DrawMarker(TS_Blanchiement.MarkerType, lieu, 0.0, 0.0, 0.0, 0.0,0.0,0.0, TS_Blanchiement.MarkerSizeLargeur, TS_Blanchiement.MarkerSizeEpaisseur, TS_Blanchiement.MarkerSizeHauteur, TS_Blanchiement.MarkerColorR, TS_Blanchiement.MarkerColorG, TS_Blanchiement.MarkerColorB, TS_Blanchiement.MarkerOpacite, TS_Blanchiement.MarkerSaute, true, p19, TS_Blanchiement.MarkerTourne)
                     end
-                    if dist3 <= 3.0 then
+                    if dist3 <= TS_Blanchiement.Interact_Distance then
                         if not IsPedInAnyVehicle(playerPed, true) then
                             if jessy then
                                 ESX.ShowHelpNotification(TS_Blanchiement.Text_Interact)
