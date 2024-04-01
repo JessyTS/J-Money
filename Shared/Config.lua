@@ -35,8 +35,8 @@ TS_Blanchiement = {
     MarkerTourne = true, -- Si le marker tourne (true = oui, false = non)
 
     Pos_Blanchiement = {
-        [1] = {vector3(90.6172, 3745.0625, 40.7709)},
-        [2] = {vector3(90.6172, 3745.0625, 40.7709)},
+        [1] = {vector3(2203.7351, 5553.5718, 54.0881)},
+        [2] = {vector3(2201.3713, 5551.7759, 54.0760)},
         [3] = {vector3(90.6172, 3745.0625, 40.7709)},
     }
 }

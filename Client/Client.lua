@@ -70,12 +70,12 @@ Citizen.CreateThread(function()
         for _,v in pairs(TS_Blanchiement.Pos_Blanchiement) do
             if TS_Blanchiement.Blanchiement then
                 local playerPed = PlayerPedId()
-                local lieu = vector3(2201.3740, 5552.3564, 54.0785)
+                local lieu = vector3(v.pos.x, v.pos.y, v.pos.z)
                 local plyCoords3 = GetEntityCoords(GetPlayerPed(-1), false)
                 local dist3 = Vdist(plyCoords3.x, plyCoords3.y, plyCoords3.z, lieu)
                 if dist3 <= 15 then
                     if jessy then
-                        DrawMarker(21, lieu, 0.0, 0.0, 0.0, 0.0,0.0,0.0, 0.7, 0.7, 0.7, 0, 166, 255, 255, true, true, p19, true)
+                        DrawMarker(TS_Blanchiement.MarkerType, lieu, 0.0, 0.0, 0.0, 0.0,0.0,0.0, TS_Blanchiement.MarkerSizeLargeur, TS_Blanchiement.MarkerSizeEpaisseur, TS_Blanchiement.MarkerSizeHauteur, TS_Blanchiement.MarkerColorR, TS_Blanchiement.MarkerColorG, TS_Blanchiement.MarkerColorB, TS_Blanchiement.MarkerOpacite, TS_Blanchiement.MarkerSaute, true, p19, TS_Blanchiement.MarkerTourne)
                     end
                     if dist3 <= 3.0 then
                         if not IsPedInAnyVehicle(playerPed, true) then
