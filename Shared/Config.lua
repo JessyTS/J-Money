@@ -1,12 +1,23 @@
 TS_Blanchiement = {}
 
+--[[    Info IMPORTANTE
+    Ceci est un script de blanchiment d'argent Compatible ESX et Full RageUI 
+    très bien optimisé à 0.1 ms by JessyTS   
+
+                        https://discord.gg/Yk94Eq6j
+]]
+
 TS_Blanchiement = {
 
     Blanchiement = true,
 
-    ESX = 'new',
+    ESX = "new",
+    -- new | for ESX = exports["es_extended"]:getSharedObject() | New versions
+    -- old | for TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end) | Old Versions
 
-    Debug = true,
+    Debug = true, -- true or false 
+    -- // Si vous voulez renvoyer chaque action vers la console \\
+    -- // If you want to return every action to the console \\
 
     Webhook_Discord = true,
 
